@@ -164,4 +164,4 @@ schedule.every(3).seconds.do(job)
 bot.infinity_polling()
 while True:
     schedule.run_pending()
-    sleep(
+    sleep(1)
