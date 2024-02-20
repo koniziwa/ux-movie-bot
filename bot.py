@@ -168,7 +168,7 @@ schedule.every(3).seconds.do(job)
 if __name__ == "__main__":
     while True:
         try:
-            bot.polling(non_stop=True, interval=0)
+            bot.polling()
         except Exception as e:
             print(e)
             sleep(15)
