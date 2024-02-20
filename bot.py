@@ -4,6 +4,7 @@ import os
 from datetime import *
 from time import *
 import schedule
+import threading
 
 
 from bot_token import *
@@ -158,10 +159,16 @@ def job():
                     os.rename(
                         f'loaded/{path}', f'loaded/{path.replace("-active", "-ended")}')
 
+def startBot():
+    bot.polling(none_stop=True, interval=0)
 
-schedule.every(3).seconds.do(job)
+def startScheduler():
+    schedule.every(3).seconds.do(job)
+    while True:
+	    schedule.run_pending()
 
-bot.infinity_polling()
-while True:
-    schedule.run_pending()
-    sleep(1)
+if __name__ == "__main__":
+    t1 = threading.Thread(target=startBot)
+    t2 = threading.Thread(target=startScheduler)
+    t1.start() 
+    t2.start()
