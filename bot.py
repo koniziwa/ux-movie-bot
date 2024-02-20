@@ -165,7 +165,8 @@ def startBot():
 def startScheduler():
     schedule.every(3).seconds.do(job)
     while True:
-	    schedule.run_pending()
+        schedule.run_pending()
+        sleep(1)
 
 if __name__ == "__main__":
     t1 = threading.Thread(target=startBot)
