@@ -18,9 +18,6 @@ def start(message):
     end(message)
     with open('assets/start_photo.jpg', 'rb') as file:
         bot.send_photo(message.chat.id, file, start_text, parse_mode='HTML')
-    while True:
-        schedule.run_pending()
-        sleep(1)
 
 
 @bot.message_handler(commands=['new'])
@@ -164,12 +161,7 @@ def job():
 
 schedule.every(3).seconds.do(job)
 
-
-if __name__ == "__main__":
-    while True:
-        try:
-            bot.polling()
-        except Exception as e:
-            print(e)
-            sleep(15)
-            continue
+bot.infinity_polling()
+while True:
+    schedule.run_pending()
+    sleep(
