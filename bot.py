@@ -160,7 +160,12 @@ def job():
                         f'loaded/{path}', f'loaded/{path.replace("-active", "-ended")}')
 
 def startBot():
-    bot.polling(none_stop=True, interval=0)
+    while True:
+        try:
+            bot.polling(none_stop=True, interval=0)
+        except Exception as e:
+            print(e)
+            sleep(5)
 
 def startScheduler():
     schedule.every(3).seconds.do(job)
